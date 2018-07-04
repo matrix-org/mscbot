@@ -2,7 +2,7 @@ use std::collections::BTreeSet;
 use std::fmt;
 
 use error::{DashResult, DashError};
-use config::RFC_BOT_MENTION;
+use config::MSC_BOT_MENTION;
 use teams::{TeamLabel, RfcbotConfig};
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
@@ -103,7 +103,7 @@ fn match_team_candidate<'a>
 /// Parses all subcommands under the fcp command.
 /// If `fcp_context` is set to false, `@rfcbot <subcommand>`
 /// was passed and not `@rfcbot fcp <subcommand>`.
-/// 
+///
 /// @rfcbot accepts roughly the following grammar:
 ///
 /// merge ::= "merge" | "merged" | "merging" | "merges" ;
@@ -216,7 +216,7 @@ fn parse_fcp_subcommand<'a>(
 fn from_invocation_line<'a>
     (setup: &'a RfcbotConfig, command: &'a str) -> DashResult<RfcBotCommand<'a>>
 {
-    let mut tokens = command.trim_left_matches(RFC_BOT_MENTION).trim()
+    let mut tokens = command.trim_left_matches(MSC_BOT_MENTION).trim()
                             .trim_left_matches(':').trim()
                             .split_whitespace();
     let invocation = tokens.next().ok_or(DashError::Misc(None))?;
@@ -265,7 +265,7 @@ impl<'a> RfcBotCommand<'a> {
         // Get the tokens for each command line (starts with a bot mention)
         command.lines()
                .map(|l| l.trim())
-               .filter(|&l| l.starts_with(RFC_BOT_MENTION))
+               .filter(|&l| l.starts_with(MSC_BOT_MENTION))
                .map(move |l| from_invocation_line(setup, l))
                .filter_map(Result::ok)
     }
