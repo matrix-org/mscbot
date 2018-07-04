@@ -418,7 +418,7 @@ fn evaluate_ffcps() -> DashResult<()> {
     let conn = &*DB_POOL.get()?;
 
     // look for any FCP proposals that entered FCP a week or more ago but aren't marked as closed
-    let one_business_week_ago = Utc::now().naive_utc() - Duration::days(10);
+    let one_business_week_ago = Utc::now().naive_utc() - Duration::days(5);
     let ffcps = fcp_proposal.filter(fcp_start.le(one_business_week_ago))
                             .filter(fcp_closed.eq(false))
                             .load::<FcpProposal>(conn);
@@ -1143,7 +1143,7 @@ impl<'a> RfcBotComment<'a> {
                 msg.push_str("at any point in this process, please speak up!\n");
 
                 msg.push_str("\nSee [this document](");
-                msg.push_str("https://github.com/anp/rfcbot-rs/blob/master/README.md");
+                msg.push_str("https://github.com/matrix-org/mscbot/blob/anoa/matrixify/README.md");
                 msg.push_str(") for info about what commands tagged team members can give me.");
 
                 msg
