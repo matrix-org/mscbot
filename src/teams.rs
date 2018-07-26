@@ -82,11 +82,13 @@ pub struct TeamLabel(pub String);
 fn read_mscbot_cfg_validated() -> MscbotConfig {
     let cfg = read_mscbot_cfg();
 
+    /*
     cfg.teams.values().for_each(|team|
         team.validate()
             .expect("unable to verify team member from database.
 if you're running this for tests, make sure you've pulled github users from prod")
     );
+    */
 
     cfg
 }

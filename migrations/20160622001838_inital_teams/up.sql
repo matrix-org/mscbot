@@ -12,13 +12,21 @@ CREATE TABLE memberships (
 );
 
 INSERT INTO teams (name, ping, label) VALUES
-    ('Core', 'test-org-blabla/spec-core', 'T-core');
+    ('Core', 'matrix-org/spec-core-team', 'T-core');
 
 INSERT INTO memberships (fk_member, fk_team)
 SELECT u.id, t.id
 FROM githubuser u, teams t
-WHERE t.ping = 'test-org-blabla/spec-core' AND (
-    u.login = 'anoadragon453'
+WHERE t.ping = 'matrix-org/spec-core-team' AND (
+    u.login = 'anoadragon453',
+    u.login = 'ara4n',
+    u.login = 'dbkr',
+    u.login = 'erikjohnston',
+    u.login = 'KitsuneRal',
+    u.login = 'mujx',
+    u.login = 'richvdh',
+    u.login = 'turt2live',
+    u.login = 'uhoreg',
 );
 
 INSERT INTO githubuser (id, login) VALUES

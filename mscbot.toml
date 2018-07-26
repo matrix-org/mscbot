@@ -1,14 +1,22 @@
 [fcp_behaviors]
 
-[fcp_behaviors."test-org-blabla/agreatrepo"]
+[fcp_behaviors."matrix-org/matrix-doc"]
 close = true
 postpone = true
 
 [teams]
 
 [teams.T-core]
-name = "Core team"
-ping = "test-org-blabla/spec-core"
+name = "Spec Core team"
+ping = "matrix-org/spec-core-team"
 members = [
   "anoadragon453",
+  "ara4n",
+  "dbkr",
+  "erikjohnston",
+  "KitsuneRal",
+  "mujx",
+  "richvdh",
+  "turt2live",
+  "uhoreg"
 ]
