@@ -4,7 +4,7 @@ use std::collections::BTreeMap;
 use std::env;
 
 pub const MSC_BOT_MENTION: &'static str = "@mscbot";
-pub const GH_ORGS: [&'static str; 1] = ["test-org-blabla"];
+pub const GH_ORGS: [&'static str; 1] = ["matrix-org"];
 
 lazy_static! {
     pub static ref CONFIG: Config = {
