@@ -27,7 +27,7 @@ lazy_static! {
 pub fn most_recent_update() -> DashResult<DateTime<Utc>> {
     info!("finding most recent github updates");
 
-    let default_date = NaiveDateTime::new(NaiveDate::from_ymd(2015, 5, 15),
+    let default_date = NaiveDateTime::new(NaiveDate::from_ymd(2018, 7, 26),
                                           NaiveTime::from_hms(0, 0, 0));
 
     let conn = &*DB_POOL.get()?;
