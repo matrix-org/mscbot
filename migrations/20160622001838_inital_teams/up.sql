@@ -18,15 +18,15 @@ INSERT INTO memberships (fk_member, fk_team)
 SELECT u.id, t.id
 FROM githubuser u, teams t
 WHERE t.ping = 'matrix-org/spec-core-team' AND (
-    u.login = 'anoadragon453',
-    u.login = 'ara4n',
-    u.login = 'dbkr',
-    u.login = 'erikjohnston',
-    u.login = 'KitsuneRal',
-    u.login = 'mujx',
-    u.login = 'richvdh',
-    u.login = 'turt2live',
-    u.login = 'uhoreg',
+    u.login = 'anoadragon453' OR
+    u.login = 'ara4n' OR
+    u.login = 'dbkr' OR
+    u.login = 'erikjohnston' OR
+    u.login = 'KitsuneRal' OR
+    u.login = 'mujx' OR
+    u.login = 'richvdh'OR 
+    u.login = 'turt2live' OR
+    u.login = 'uhoreg'
 );
 
 INSERT INTO githubuser (id, login) VALUES
