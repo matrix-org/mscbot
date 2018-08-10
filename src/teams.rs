@@ -2,11 +2,11 @@
 
 use std::collections::BTreeMap;
 
+use diesel;
 use diesel::prelude::*;
 use toml;
 
 use super::DB_POOL;
-use domain::github::GitHubUser;
 use error::*;
 
 //==============================================================================
@@ -107,15 +107,18 @@ impl Team {
         use domain::schema::githubuser::dsl::*;
         let conn = &*(DB_POOL.get()?);
 
-        // bail if they don't exist, but we don't want to actually keep the id in ram
-        for member_login in self.member_logins() {
-            let check_login = githubuser.filter(login.eq(member_login))
-                                        .first::<GitHubUser>(conn);
-            ok_or!(check_login, why => {
-                error!("unable to find {} in database: {:?}", member_login, why);
-                throw!(why);
-            });
-        }
+        // Add any users in the teams config to the githubuser table that
+        // aren't already there
+
+        let members_gh_logins: Vec<_> = self.member_logins()
+            .map(|u| login.eq(u))
+            .collect();
+
+        diesel::insert_into(githubuser)
+            .values(&members_gh_logins)
+            .on_conflict(login)
+            .do_nothing()
+            .execute(conn)?;
 
         Ok(())
     }
