@@ -146,3 +146,8 @@ members = [
   "vlad20012",
   "Xanewok",
 ]
+
+[repos]
+repos = [
+  "matrix-org/matrix-doc",
+]
