@@ -4,7 +4,7 @@ use std::time::Duration;
 
 use chrono::{DateTime, Utc};
 
-use config::{CONFIG, GH_ORGS};
+use config::{CONFIG, GH_REPOS};
 use github;
 
 pub fn start_scraping() -> JoinHandle<()> {
@@ -25,17 +25,9 @@ pub fn start_scraping() -> JoinHandle<()> {
 }
 
 pub fn scrape_github(since: DateTime<Utc>) {
-    let mut repos = Vec::new();
-    for org in &GH_ORGS {
-        repos.extend(ok_or!(github::GH.org_repos(org), why => {
-            error!("Unable to retrieve repos for {}: {:?}", org, why);
-            return;
-        }));
-    }
-
     info!("Scraping github activity since {:?}", since);
     let start_time = Utc::now().naive_utc();
-    for repo in repos {
+    for repo in &GH_REPOS {
         match github::ingest_since(&repo, since) {
             Ok(_) => info!("Scraped {} github successfully", repo),
             Err(why) => error!("Unable to scrape github {}: {:?}", repo, why),
