@@ -12,7 +12,7 @@ CREATE TABLE memberships (
 );
 
 INSERT INTO teams (name, ping, label) VALUES
-    ('Core', 'matrix-org/spec-core-team', 'T-core');
+    ('Core', 'matrix-org/spec-core-team', 'T-Core');
 
 INSERT INTO memberships (fk_member, fk_team)
 SELECT u.id, t.id
