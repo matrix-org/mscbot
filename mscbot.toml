@@ -6,7 +6,7 @@ postpone = true
 
 [teams]
 
-[teams.T-core]
+[teams.T-Core]
 name = "Spec Core team"
 ping = "matrix-org/spec-core-team"
 members = [
@@ -15,7 +15,6 @@ members = [
   "dbkr",
   "erikjohnston",
   "KitsuneRal",
-  "mujx",
   "richvdh",
   "turt2live",
   "uhoreg"
