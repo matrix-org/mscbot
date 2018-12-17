@@ -9,7 +9,7 @@ use itertools::Itertools;
 
 use DB_POOL;
 use domain::github::{GitHubUser, Issue, IssueComment};
-use domain::rfcbot::{FcpConcern, FcpProposal, FcpReviewRequest, FeedbackRequest, NewFcpProposal,
+use domain::mscbot::{FcpConcern, FcpProposal, FcpReviewRequest, FeedbackRequest, NewFcpProposal,
                      NewFcpConcern, NewFcpReviewRequest, NewFeedbackRequest,
                      NewPoll, Poll, NewPollResponseRequest, PollResponseRequest};
 use domain::schema::*;
@@ -187,9 +187,9 @@ fn parse_ticky_boxes<'a>(what: &'a str, id: i32, comment: &'a IssueComment)
     -> impl Iterator<Item = &'a str>
 {
     comment.body.lines().filter_map(move |line| if line.starts_with("* [") {
-        let l = line.trim_left_matches("* [");
+        let l = line.trim_start_matches("* [");
         let reviewed = l.starts_with('x');
-        let remaining = l.trim_left_matches("x] @").trim_left_matches(" ] @");
+        let remaining = l.trim_start_matches("x] @").trim_start_matches(" ] @");
 
         if let Some(username) = remaining.split_whitespace().next() {
             trace!("reviewer parsed as reviewed? {} (line: \"{}\")",

@@ -31,7 +31,7 @@ mod html {
     use nag;
 
     #[get("/")]
-    fn all_fcps() -> DashResult<content::Html<String>> {
+    pub fn all_fcps() -> DashResult<content::Html<String>> {
         let mut teams = BTreeMap::new();
         for fcp in nag::all_fcps()? {
             let nag::FcpWithInfo {
@@ -79,7 +79,7 @@ mod html {
     }
 
     #[get("/fcp/<username>")]
-    fn member_fcps(username: String) -> DashResult<content::Html<String>> {
+    pub fn member_fcps(username: String) -> DashResult<content::Html<String>> {
         let (user, fcps) = nag::individual_nags(&username)?;
 
         let context = json!({
@@ -95,7 +95,7 @@ mod html {
 }
 
 mod api {
-    use rocket_contrib::Json;
+    use rocket_contrib::json::Json;
     use DB_POOL;
     use domain::github::GitHubUser;
     use error::DashResult;

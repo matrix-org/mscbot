@@ -43,7 +43,7 @@ pub struct Client {
     rate_limit_timeout: DateTime<Utc>,
 }
 
-fn read_to_string<R: Read>(reader: &mut R) -> DashResult<String> {    
+fn read_to_string<R: Read>(reader: &mut R) -> DashResult<String> {
     let mut string = String::new();
     reader.read_to_string(&mut string)?;
     Ok(string)
@@ -90,7 +90,7 @@ impl Client {
                 "state" => "all".to_string(),
                 "since" => format!("{:?}", start),
                 "per_page" => format!("{}", PER_PAGE),
-                "direction" => "asc".to_string()    
+                "direction" => "asc".to_string()
             }))
     }
 
@@ -143,8 +143,8 @@ impl Client {
 
                 if tokens[1] == "rel=\"next\"" {
                     let url = tokens[0]
-                        .trim_left_matches('<')
-                        .trim_right_matches('>')
+                        .trim_start_matches('<')
+                        .trim_end_matches('>')
                         .to_string();
                     return Some(url);
                 }

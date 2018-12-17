@@ -3,7 +3,7 @@ use std::fmt;
 
 use error::{DashResult, DashError};
 use config::MSC_BOT_MENTION;
-use teams::{TeamLabel, RfcbotConfig};
+use teams::{TeamLabel, MscbotConfig};
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub enum Label {
@@ -91,7 +91,7 @@ fn strip_prefix<'h>(haystack: &'h str, prefix: &str) -> &'h str {
 }
 
 fn match_team_candidate<'a>
-    (setup: &'a RfcbotConfig, team_candidate: &str)
+    (setup: &'a MscbotConfig, team_candidate: &str)
     -> Option<&'a TeamLabel>
 {
     setup.teams().find(|&(label, team)| {
@@ -142,7 +142,7 @@ fn match_team_candidate<'a>
 ///
 /// grammar ::= "@rfcbot" ":"? invocation ;
 fn parse_fcp_subcommand<'a>(
-    setup: &'a RfcbotConfig,
+    setup: &'a MscbotConfig,
     command: &'a str,
     subcommand: &'a str,
     fcp_context: bool
@@ -214,10 +214,10 @@ fn parse_fcp_subcommand<'a>(
 }
 
 fn from_invocation_line<'a>
-    (setup: &'a RfcbotConfig, command: &'a str) -> DashResult<RfcBotCommand<'a>>
+    (setup: &'a MscbotConfig, command: &'a str) -> DashResult<RfcBotCommand<'a>>
 {
-    let mut tokens = command.trim_left_matches(MSC_BOT_MENTION).trim()
-                            .trim_left_matches(':').trim()
+    let mut tokens = command.trim_start_matches(MSC_BOT_MENTION).trim()
+                            .trim_start_matches(':').trim()
                             .split_whitespace();
     let invocation = tokens.next().ok_or(DashError::Misc(None))?;
     match invocation {
@@ -259,7 +259,7 @@ pub enum RfcBotCommand<'a> {
 }
 
 impl<'a> RfcBotCommand<'a> {
-    pub fn from_str_all(setup: &'a RfcbotConfig, command: &'a str)
+    pub fn from_str_all(setup: &'a MscbotConfig, command: &'a str)
         -> impl Iterator<Item = RfcBotCommand<'a>>
     {
         // Get the tokens for each command line (starts with a bot mention)
