@@ -210,7 +210,7 @@ fn parse_ticky_boxes<'a>(what: &'a str, id: i32, comment: &'a IssueComment)
     })
 }
 
-fn evaluate_nags() {
+pub fn evaluate_nags() {
     ok_or!(evaluate_pendings(), why =>
         error!("Unable to evaluate outstanding proposals: {:?}", why));
 

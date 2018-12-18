@@ -147,6 +147,8 @@ pub fn handle_comment(conn: &PgConnection, comment: CommentFromJson, repo: &str)
         diesel::update(issuecomment::table.find(comment.id))
             .set(&comment)
             .execute(conn)?;
+
+        nag::evaluate_nags(); // So that updates to the comment are picked up
     } else {
         diesel::insert_into(issuecomment::table)
             .values(&comment)
