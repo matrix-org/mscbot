@@ -128,6 +128,10 @@ fn update_proposal_review_status(proposal_id: i32) -> DashResult<()> {
                 .filter(fk_reviewer.eq(user.id))
                 .first(conn)?;
 
+            if !review_request.reviewed {
+                info!("Marking user {} as having reviewed proposal {}", username, proposal.id);
+            }
+
             review_request.reviewed = true;
             diesel::update(fcp_review_request.find(review_request.id))
                 .set(&review_request)
@@ -316,6 +320,7 @@ fn evaluate_pendings() -> DashResult<()> {
         // if the issue has been closed before an FCP starts,
         // then we just need to cancel the FCP entirely
         if !issue.open {
+            info!("Cancelling FCP for proposal {} as issue closed", proposal.id);
             ok_or_continue!(cancel_fcp(&initiator, &issue, &proposal), why =>
                 error!("Unable to cancel FCP for proposal {}: {:?}",
                         proposal.id, why));
@@ -364,6 +369,12 @@ fn evaluate_pendings() -> DashResult<()> {
         }
 
         let majority_complete = num_outstanding_reviews < num_complete_reviews;
+
+        info! (
+            "Proposal {} ({}#{}): active_concerns: {}, reviews outstanding vs complete: {} vs {} ",
+            proposal.id, &issue.repository, issue.number,
+            num_active_concerns, num_outstanding_reviews, num_complete_reviews,
+        );
 
         if num_active_concerns == 0 && majority_complete && num_outstanding_reviews < 3 {
             // TODO only record the fcp as started if we know that we successfully commented
