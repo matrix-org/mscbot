@@ -7,7 +7,7 @@ setup a [github access token](https://help.github.com/articles/creating-a-person
 on debian:
 
 ```
- sudo apt install libmysqlclient-dev libsqlite3-dev libpq-dev postgresql
+ sudo apt install default-libmysqlclient-dev libsqlite3-dev libpq-dev postgresql
 ```
 
 setup postgres:
