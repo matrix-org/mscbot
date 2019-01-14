@@ -1,8 +1,8 @@
 # mscbot
 
-[mscbot](https://github.com/mscbot) manages asynchronous decision making on Rust issues and PRs. It has been adapted from rust-lang/anp's excellent [rfcbot](https://github.com/anp/rfcbot-rs).
+[mscbot](https://github.com/mscbot) manages asynchronous decision making on Matrix spec issues and PRs. It has been adapted from rust-lang/anp's excellent [rfcbot](https://github.com/anp/rfcbot-rs).
 
-It listens for commands on all repositories owned by the [matrix-org](https://github.com/rust-lang) organization.
+It listens for commands on all repositories owned by the [matrix-org](https://github.com/matrix-org) organization.
 
 While its intended usage is for MSCs, you can use its tracking on any issue or pull request which needs an async review/decision cycle.
 
