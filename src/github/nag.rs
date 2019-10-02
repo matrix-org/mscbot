@@ -1149,7 +1149,7 @@ impl<'a> RfcBotComment<'a> {
                     }
                 }
 
-                msg.push_str("\nOnce a majority of reviewers approve (and none object), this will enter its final ");
+                msg.push_str("\nOnce at least 75% of reviewers approve (and none object), this will enter its final ");
                 msg.push_str("comment period. If you spot a major issue that hasn't been raised ");
                 msg.push_str("at any point in this process, please speak up!\n");
 
