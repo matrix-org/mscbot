@@ -1,6 +1,6 @@
 [fcp_behaviors]
 
-[fcp_behaviors."matrix-org/matrix-doc"]
+[fcp_behaviors."mscbot-test-org/proposals"]
 close = true
 postpone = true
 
@@ -8,14 +8,7 @@ postpone = true
 
 [teams.proposal]
 name = "Spec Core team"
-ping = "matrix-org/spec-core-team"
+ping = "mscbot-test-org/spec-core-team"
 members = [
-  "anoadragon453",
-  "ara4n",
-  "dbkr",
-  "erikjohnston",
-  "KitsuneRal",
-  "richvdh",
-  "turt2live",
-  "uhoreg"
+  "anoadragon453"
 ]

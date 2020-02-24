@@ -368,7 +368,7 @@ fn evaluate_pendings() -> DashResult<()> {
                         proposal.id, why));
         }
 
-        let majority_complete = num_outstanding_reviews < num_complete_reviews;
+        let majority_complete = 4 * num_complete_reviews >= 3 * reviews.len();
 
         info! (
             "Proposal {} ({}#{}): active_concerns: {}, reviews outstanding vs complete: {} vs {} ",
@@ -1149,7 +1149,7 @@ impl<'a> RfcBotComment<'a> {
                     }
                 }
 
-                msg.push_str("\nOnce a majority of reviewers approve (and none object), this will enter its final ");
+                msg.push_str("\nOnce at least 75% of reviewers approve (and none object), this will enter its final ");
                 msg.push_str("comment period. If you spot a major issue that hasn't been raised ");
                 msg.push_str("at any point in this process, please speak up!\n");
 
